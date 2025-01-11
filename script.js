@@ -22,7 +22,16 @@ setInterval(() => {
     
     // Get the current date and day
     let now = new Date();
-    let date = now.toLocaleDateString(); // Format the date as MM/DD/YYYY
+    let dayOfMonth = now.getDate();
+    let month = now.getMonth() + 1; // Months are 0-based
+    let year = now.getFullYear();
+    
+    // Add leading zero to single-digit days and months
+    dayOfMonth = dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth;
+    month = month < 10 ? "0" + month : month;
+
+    // Format the date as DD/MM/YYYY
+    let date = `${dayOfMonth}/${month}/${year}`;
     let day = now.toLocaleString('default', { weekday: 'long' }); // Get the day of the week
     
     // Convert 24-hour format to 12-hour format
