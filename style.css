@@ -1,0 +1,248 @@
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body setup */
+body {
+    display: flex;
+    flex-direction: column; /* Stack clock and date-time sections */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #2f363e;
+    gap: 50px; /* Space between the clock and date-time */
+}
+
+/* #time section (Clock circles) */
+#time {
+    display: flex;
+    gap: 40px;
+    color: #fff;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Styling for the time circles */
+#time .circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+#time .circle svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform: rotate(270deg);
+}
+
+#time .circle svg circle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke: #191919;
+    stroke-width: 4;
+    transform: translate(5px, 5px);
+}
+
+#time .circle svg circle:nth-child(2) {
+    stroke: var(--clr);
+    stroke-dasharray: 440;
+}
+
+#time div span {
+    position: absolute;
+    transform: translateX(-50%) translateY(-10%);
+    font-size: 0.38em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+#time div {
+    position: absolute;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.5em;
+}
+
+#time .ap {
+    position: relative;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+#time .ap #ampm {
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 5px 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for AM/PM */
+#time .ap:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+/* AM/PM text hover effect */
+#time .ap #ampm:hover {
+    color: #fee800;
+}
+
+.dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+
+.dots::before {
+    content: '';
+    position: absolute;
+    top: -3;
+    width: 15px;
+    height: 15px;
+    background: var(--clr);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+}
+
+/* Responsive design for screens below 610px */
+@media screen and (max-width: 610px) {
+    #time {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    #time .circle {
+        margin: 20px 0; /* Add margin between circles */
+    }
+
+    #time div {
+        font-size: 1.2em; /* Smaller font size for smaller screens */
+    }
+
+    #time .ap {
+        font-size: 1.2em;
+        padding: 8px 18px;
+        margin-top: 20px; /* Space between circles */
+    }
+
+    #time .ap #ampm {
+        font-size: 1em;
+        padding: 4px 10px;
+    }
+}
+
+/* #date-time section (Date and Day) */
+#date-time {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffcc00; /* Yellow background */
+    color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Styling for the Date with Red Gradient Text */
+#date-time #date {
+    font-size: 2.6rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff3b3b, #e60000); /* Red gradient text */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: fadeInText 2s ease-in-out forwards;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the Day with Darker Red */
+#date-time #day {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #b30000; /* Darker red color */
+    animation: fadeInText 2s ease-in-out 1s forwards; /* Slight delay for the day */
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyframes for text fade-in animation */
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover Effect for the Date and Day */
+#date-time:hover {
+    background-color: #ffcc00; /* Darker yellow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #ffcc00, 0 0 35px #ffcc00;
+}
+
+/* Responsive Design for Tablet Screens */
+@media (max-width: 768px) {
+    #date-time {
+        width: 80%;
+        padding: 20px;
+    }
+
+    #date-time #date {
+        font-size: 2.2rem;
+    }
+
+    #date-time #day {
+        font-size: 1.6rem;
+    }
+}
+
+/* Responsive Design for Mobile Screens */
+@media (max-width: 480px) {
+    #date-time {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #date-time #date {
+        font-size: 1.8rem;
+    }
+
+    #date-time #day {
+        font-size: 1.4rem;
+    }
+}
